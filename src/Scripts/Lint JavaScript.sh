@@ -18,10 +18,10 @@ cd $DIR
 # Run eslint in npm project
 RESPONSE=$($(npm bin)/eslint $BB_DOC_PATH --format compact)
 
-LINECOUNT=$(echo "${RESPONSE}" | wc -l)
+CHARCOUNT=$(echo "${RESPONSE}" | wc -m)
 
-# zero lines means my js is eslint perfect
-if [ $LINECOUNT -gt 0 ]
+# eslint output of one character indicates no problems
+if [ $CHARCOUNT -gt 1 ]
 then
 	# head (get first line only)
 	# grep -c (get the count of lines starting with: BB_DOC_PATH)
@@ -34,7 +34,10 @@ then
 
 	else
 		# unexpected output - pass it to STDOUT
-		echo "${RESPONSE}"
+		echo "Oops! Perhaps eslint output has changed. Please report https://github.com/ollicle/BBEdit-ESLint/issues/"
+		echo "RESPONSE ${RESPONSE}"
+		echo "CHARCOUNT $CHARCOUNT"
+		echo "RESULT $RESULT"
 
 	fi
 fi
