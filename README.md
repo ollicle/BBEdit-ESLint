@@ -6,13 +6,13 @@ The ESLint.bbpackage packages a single script for passing the frontmost document
 
 ## Requirements
 
-- [BBEdit](http://www.barebones.com/products/bbedit/) version 11.6 or greater (Maybe also TextWrangler?)
+- [BBEdit](http://www.barebones.com/products/bbedit/) version 11.6 or greater
 - BBEdit command line tools (“BBEdit > Install Command Line Tools”)
 - [ESLint CLI](http://eslint.org/docs/user-guide/command-line-interface) installed and configured
 
 ## Installation
 
-1. Download and unzip the package: [ESLint.bbpackage_v2.0.0.zip](https://github.com/ollicle/BBEdit-ESLint/raw/master/dist/ESLint.bbpackage_v2.0.0.zip).
+1. Download and unzip the package: [ESLint.bbpackage_v3.0.0.zip](https://github.com/ollicle/BBEdit-ESLint/raw/master/dist/ESLint.bbpackage_v3.0.0.zip).
 2. Double–click the ESLint.bbpackage, BBEdit will prompt you to install (or update), and restart.
 
 The package file will be copied to the Packages directory in BBEdit’s Application Support directory. Delete it from here should you wish uninstall later.
