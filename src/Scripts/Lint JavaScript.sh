@@ -13,10 +13,10 @@ FORMAT_COMPACT="(?P<file>.+?): line (?P<line>\d+), (col (?P<col>\d+),)? (?P<type
 DIR=$(dirname "${BB_DOC_PATH}")
 
 # move to current directory to provide context for npm
-cd $DIR
+cd "$DIR"
 
 # Run eslint in npm project
-RESPONSE=$($(npm bin)/eslint $BB_DOC_PATH --format compact)
+RESPONSE=$($(npm bin)/eslint "$BB_DOC_PATH" --format compact)
 
 CHARCOUNT=$(echo "${RESPONSE}" | wc -m)
 
