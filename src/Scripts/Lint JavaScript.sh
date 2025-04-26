@@ -10,24 +10,28 @@
 FORMAT_COMPACT="(?P<file>.+?): line (?P<line>\d+), (col (?P<col>\d+),)? (?P<type>[a-zA-z]+) - (?P<msg>.*)$"
 
 # determine parent directory of file
-DIR=$(dirname "${BB_DOC_PATH}")
+DIR="$(dirname "${BB_DOC_PATH}")"
 
 # move to current directory to provide context for npm
-cd "$DIR"
+cd "$DIR" || { echo "Unable to 'cd \"$DIR\"'" ; exit 1 ; }
 
-# Run eslint in npm project
-RESPONSE=$($(npm bin)/eslint "$BB_DOC_PATH" --format compact)
+# check for eslint
+hash eslint > /dev/null 2>&1 || { echo "eslint not installed" ; exit 1 ; }
 
-CHARCOUNT=$(echo "${RESPONSE}" | wc -m)
+# Run eslint in npm project (requires 'eslint-formatter-compact'
+# Install that manually with `npm install -D eslint-formatter-compact`
+RESPONSE=$("$(which eslint)" "$BB_DOC_PATH" --format compact)
+
+CHARCOUNT="${#RESPONSE}"
 
 # eslint output of one character indicates no problems
-if [ $CHARCOUNT -gt 1 ]
+if [ "$CHARCOUNT" -gt 1 ]
 then
 	# head (get first line only)
 	# grep -c (get the count of lines starting with: BB_DOC_PATH)
 	RESULT=$(echo "${RESPONSE}" | head -n 1 | grep -c "^$BB_DOC_PATH")
 
-	if [ $RESULT -eq 1 ]
+	if [ "$RESULT" -eq 1 ]
 	then
 		# expected eslint output - pass it to bbresults
 		echo "${RESPONSE}" | bbresults --pattern "$FORMAT_COMPACT"
@@ -38,6 +42,6 @@ then
 		echo "RESPONSE ${RESPONSE}"
 		echo "CHARCOUNT $CHARCOUNT"
 		echo "RESULT $RESULT"
-
+		exit 1
 	fi
 fi
