@@ -19,7 +19,9 @@ The package file will be copied to the Packages directory in BBEdit’s Applicat
 
 ### Bring your own ESLint
 
-As noted in the requirements, this package does not install ESLint itself. The contained script presumes `eslint` is [installed](http://eslint.org/docs/user-guide/command-line-interface) and [configured](http://eslint.org/docs/user-guide/configuring) with a configuration file (such as .eslintrc.js or a `eslintConfig` field in a package.json).
+As noted in the requirements, this package does not install ESLint itself. The contained script presumes `eslint` is [installed](http://eslint.org/docs/user-guide/command-line-interface) and [configured](http://eslint.org/docs/user-guide/configuring) with a configuration file (such as eslint.config.js or a `eslintConfig` field in a package.json).
+
+The script calls eslint with the `--format compact` option. The compact formatter is no longer part of core ESLint. Install it manually with `npm install -D eslint-formatter-compact`.
 
 ## Usage
 
